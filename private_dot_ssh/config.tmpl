@@ -1,0 +1,15 @@
+{{- $ssh_dir := joinPath .chezmoi.homeDir ".ssh" -}}
+Host github.com
+    User git
+{{- if eq .mode "work" }}    
+    IdentityFile {{ joinPath $ssh_dir "asdennie.github.com.git" | quote }}
+{{- else }}
+    IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
+{{- end -}}
+
+{{- if eq .mode "home" -}}
+Host ssh.delaserfrezer.com
+  Port 18765
+  User u8-3ugfsadqhn9m
+  IdentityFile {{ joinPath $ssh_dir "ssh.delaserfrezer.com.ssh" | quote }}
+{{- end -}}

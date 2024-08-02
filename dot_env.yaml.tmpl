@@ -1,0 +1,4 @@
+AGE_MASTER_RECIPIENT: age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs
+AGE_SERVICES_RECIPIENT: age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms
+AGE_KEY_FILE: &age_key_file {{ joinPath .chezmoi.homeDir ".age.master.key" | quote }}
+SOPS_AGE_KEY_FILE: *age_key_file
