@@ -7,7 +7,7 @@ Host github.com
     IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
 {{- end -}}
 
-{{- if eq .mode "home" -}}
+{{- if eq .mode "home" }}
 Host ssh.delaserfrezer.com
   Port 18765
   User u8-3ugfsadqhn9m

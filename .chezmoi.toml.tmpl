@@ -17,3 +17,6 @@ encryption = "age"
 [age]
     identity = {{ joinPath .chezmoi.homeDir ".age.master.txt" | quote }}
     recipients = [ {{ range $index,$recipient := $recipients }}{{- if $index }}, {{end}}{{ $recipient | quote -}} {{end}} ]
+
+[cd]
+    command = "nu"

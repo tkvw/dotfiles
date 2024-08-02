@@ -2,11 +2,23 @@
 
 ## Requirements
 
-### Windows 
+- age
+- nu shell
+- autojump
+- starship
+
+### Windows
 
 - nushell (winget install nushell)
-- starship (winget install starship)
+- scoop
 
+```
+
+```
+
+### Linux
+
+- homebrew
 
 ## Todo
 

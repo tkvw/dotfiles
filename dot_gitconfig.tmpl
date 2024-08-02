@@ -1,10 +1,10 @@
 [core]
-	excludesFile = {{ joinPath .chezmoi.homeDir ".gitignore" }}
+	excludesFile = {{ joinPath .chezmoi.homeDir ".gitignore" | quote }}
 [user]
 	name = {{ .git.name }}
 	{{- $git := eq .mode "work" | ternary .git.work .git.home }}
 	email = {{ $git.email }}
-	signingkey = {{ joinPath .chezmoi.homeDir ".ssh" $git.signingkey  }}
+	signingkey = {{ joinPath .chezmoi.homeDir ".ssh" $git.signingkey | quote  }}
 
 [init]
 	defaultBranch = main
