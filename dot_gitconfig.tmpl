@@ -1,5 +1,8 @@
 [core]
 	excludesFile = {{ joinPath .chezmoi.homeDir ".gitignore" | quote }}
+	autocrlf = input
+	eol = lf
+
 [user]
 	name = {{ .git.name }}
 	{{- $git := eq .mode "work" | ternary .git.work .git.home }}

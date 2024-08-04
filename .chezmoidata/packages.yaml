@@ -1,0 +1,9 @@
+packages:
+  - package: nushell
+  - package: age
+  - package: starship
+  - package: autojump
+  - package: atuin
+  - package: sops
+  - package: mkcert
+  - package: git
