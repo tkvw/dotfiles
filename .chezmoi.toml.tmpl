@@ -1,8 +1,10 @@
 {{- $modes := list "work" "home" -}}
 {{- $mode := promptChoice "environment" $modes "home" -}}
+{{- $docker := promptBoolOnce . "docker" "docker" false }}
 
 [data]
     mode = {{ $mode | quote }}
+    docker = {{ $docker }}
 [data.git]
     name = "Dennie de Lange"
 [data.git.home]
@@ -20,3 +22,6 @@ encryption = "age"
 
 [cd]
     command = "nu"
+
+[hooks.read-source-state.pre]
+    command = ".local/share/chezmoi/.install-password-manager.sh"
