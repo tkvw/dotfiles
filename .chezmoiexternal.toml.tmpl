@@ -1,3 +1,4 @@
+{{- if ne .target "docker" -}}
 [".config/nu_scripts"]
     type = "archive"
     url = "https://github.com/nushell/nu_scripts/archive/refs/heads/main.zip"
@@ -9,3 +10,4 @@
     type = "archive"
     url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraMono.zip"
     exact = true
+{{ end }}

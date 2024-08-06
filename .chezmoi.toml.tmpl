@@ -1,10 +1,11 @@
 {{- $modes := list "work" "home" -}}
 {{- $mode := promptChoice "environment" $modes "home" -}}
-{{- $docker := promptBoolOnce . "docker" "docker" false }}
+{{- $targets := list "windows" "wsl" "docker" -}}
+{{- $target := promptChoiceOnce . "target" "target" $targets -}}
 
 [data]
     mode = {{ $mode | quote }}
-    docker = {{ $docker }}
+    target = {{ $target | quote }}
 [data.git]
     name = "Dennie de Lange"
 [data.git.home]
