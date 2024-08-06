@@ -905,3 +905,5 @@ source {{ joinPath $nu_aliases "git" "git-aliases.nu" | quote }}
 
 use {{ joinPath $nu_hooks "direnv" "direnv.nu" | quote }}
 source {{ joinPath $nu_hooks "filesystem" "autojump.nu" | quote }}
+
+source {{ joinPath .chezmoi.homeDir ".config" "nushell" "aliases.nu"  | quote }}
