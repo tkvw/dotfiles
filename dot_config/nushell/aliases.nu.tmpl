@@ -3,6 +3,6 @@
 
 {{- range $profile := $profiles -}}
 {{- range $target := $targets -}}
-export alias ch-{{$profile}}-{{$target}} = chezmoi init --promptChoice profile={{$profile}} --promptChoice target={{$target}} --apply
+export alias ch-{{$target}}-{{$profile}} = chezmoi init --promptChoice profile={{$profile}} --promptChoice target={{$target}} --apply
 {{ end -}}
 {{- end -}}
