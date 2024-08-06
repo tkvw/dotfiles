@@ -1,10 +1,10 @@
-{{- $modes := list "work" "home" -}}
-{{- $mode := promptChoice "environment" $modes "home" -}}
+{{- $profiles := list "work" "home" -}}
+{{- $profile := promptChoice "profile" $profiles ( env "CHEZMOI_PROFILE" | default "home" ) -}}
 {{- $targets := list "windows" "wsl" "docker" -}}
 {{- $target := promptChoiceOnce . "target" "target" $targets -}}
 
 [data]
-    mode = {{ $mode | quote }}
+    profile = {{ $profile | quote }}
     target = {{ $target | quote }}
 [data.git]
     name = "Dennie de Lange"
