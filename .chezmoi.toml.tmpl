@@ -1,5 +1,5 @@
 {{- $modes := list "work" "home" -}}
-{{- $mode := promptChoice "Which environment to use" $modes "home" -}}
+{{- $mode := promptChoice "environment" $modes "home" -}}
 
 [data]
     mode = {{ $mode | quote }}
