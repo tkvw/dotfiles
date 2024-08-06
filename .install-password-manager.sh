@@ -1,4 +1,5 @@
 #!/bin/sh
+dir=$(dirname $0)
 
-./.install_age.sh
-./.install_age_key.sh
+. "$dir/.install_age.sh"
+. "$dir/.#./.install_age_key.sh"
