@@ -24,5 +24,7 @@ encryption = "age"
 [cd]
     command = "nu"
 
+{{ if ne $target "windows" -}}
 [hooks.read-source-state.pre]
     command = ".local/share/chezmoi/.install-password-manager.sh"
+{{- end -}}
