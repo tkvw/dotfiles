@@ -18,7 +18,7 @@
 {{- $recipients := list "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs" "age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms" }}
 encryption = "age"
 [age]
-    identity = {{ joinPath .chezmoi.homeDir ".age.master.txt" | quote }}
+    identity = {{ joinPath .chezmoi.homeDir ".config" "age" "master.key.txt" | quote }}
     recipients = [ {{ range $index,$recipient := $recipients }}{{- if $index }}, {{end}}{{ $recipient | quote -}} {{end}} ]
 
 [cd]
