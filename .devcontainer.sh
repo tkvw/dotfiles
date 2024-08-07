@@ -14,4 +14,5 @@ if [ ! "$(command -v chezmoi)" ]; then
   fi
 fi
 
-chezmoi init --promptDefaults --promptChoice target=docker --apply
+chezmoi init --promptDefaults --promptChoice target=docker 
+chezmoi apply
