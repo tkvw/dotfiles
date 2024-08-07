@@ -1,0 +1,13 @@
+{{ $starship_version := .packages.starship.version }}
+{{- if eq .chezmoi.os "linux" -}}
+[".local/bin/starship"]
+    type = "archive-file" 
+    executable = true
+    url = "https://github.com/starship/starship/releases/download/v{{ $starship_version }}/starship-x86_64-unknown-linux-gnu.tar.gz"
+    path = "starship"
+{{ else if eq .chezmoi.os "windows" }}
+[".local/bin/starship.exe"]
+    type = "archive-file" 
+    url = "https://github.com/starship/starship/releases/download/v{{ $starship_version }}/starship-x86_64-pc-windows-msvc.zip"
+    path = "starship.exe"
+{{ end }}

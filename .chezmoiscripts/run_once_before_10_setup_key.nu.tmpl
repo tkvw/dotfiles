@@ -1,8 +1,0 @@
-{{- if not (empty .age.key) -}}
-{{- $key_file := .chezmoi.config.age.identity -}}
-if not ("{{ $key_file }}" | path exists) {
-    mkdir ({{ $key_file | quote }} | path dirname )
-    $'{{ includeTemplate "keys.txt.tmpl" . }}' | save "{{ $key_file }}"
-}
-
-{{- end }}

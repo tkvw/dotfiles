@@ -1,0 +1,15 @@
+{{ if not (empty .age.key) -}}
+{{ $key_file := .chezmoi.config.age.identity | quote }}
+{{- if eq .chezmoi.os "linux" -}}
+#!/bin/sh
+
+if [ -f {{ $key_file }} ]; then
+    exit
+fi
+
+mkdir -p $(dirname {{$key_file}})
+echo '{{ includeTemplate "keys.txt.tmpl" . }}' > {{$key_file}}
+
+
+{{- end }}
+{{- end }}

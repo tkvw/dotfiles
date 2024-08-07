@@ -4,34 +4,4 @@
     url = "https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/FiraMono.zip"
     exact = true
 
-{{- $nushell_version := .packages.nushell.version }}
-[".local/bin/nu"]
-    type = "archive"
-    url = "https://github.com/nushell/nushell/releases/download/{{ $nushell_version }}/nu-{{ $nushell_version }}-x86_64-pc-windows-msvc.zip"
-    exclude = ["LICENSE","README.txt","LICENSE-for-less.txt"]
-
-{{ $age_version := .packages.age.version }}
-[".local/bin/age"]
-    type = "archive"    
-    url = "https://github.com/FiloSottile/age/releases/download/v{{ $age_version }}/age-v{{ $age_version }}-windows-amd64.zip"
-    stripComponents = 1
-    include = ["age/age.exe","age/age-keygen.exe"]
-
-{{ $starship_version := .packages.starship.version }}
-[".local/bin/starship.exe"]
-    type = "archive-file" 
-    url = "https://github.com/starship/starship/releases/download/v{{ $starship_version }}/starship-x86_64-pc-windows-msvc.zip"
-    path = "starship.exe"
-
-{{ $mkcert_version := .packages.mkcert.version }}
-[".local/bin/mkcert.exe"]
-    type = "file"    
-    url = "https://github.com/FiloSottile/mkcert/releases/download/v{{$mkcert_version}}/mkcert-v{{$mkcert_version}}-windows-amd64.exe"
-
-{{- $sops_version := .packages.sops.version }}
-[".local/bin/sops.exe"]
-    type = "file"    
-    url = "https://github.com/getsops/sops/releases/download/v{{$sops_version}}/sops-v{{$sops_version}}.exe"
-
-
 {{- end -}}

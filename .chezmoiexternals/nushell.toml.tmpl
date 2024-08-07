@@ -1,0 +1,13 @@
+{{- $nushell_version := .packages.nushell.version -}}
+{{- if eq .chezmoi.os "linux" -}}
+[".local/bin"]
+    type = "archive"
+    url = "https://github.com/nushell/nushell/releases/download/{{ $nushell_version }}/nu-{{ $nushell_version }}-x86_64-unknown-linux-gnu.tar.gz"
+    stripComponents=1
+    exclude = ["*/LICENSE","*/README.txt"]
+{{ else if eq .chezmoi.is "windows" -}}
+[".local/bin"]
+    type = "archive"
+    url = "https://github.com/nushell/nushell/releases/download/{{ $nushell_version }}/nu-{{ $nushell_version }}-x86_64-pc-windows-msvc.zip"
+    exclude = ["LICENSE","README.txt","LICENSE-for-less.txt"]
+{{ end -}}

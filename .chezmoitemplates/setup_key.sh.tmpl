@@ -1,0 +1,9 @@
+#!/bin/sh
+{{ $key_file := .chezmoi.config.age.identity | quote -}}
+
+if [ -f {{ $key_file }} ]; then
+    exit
+fi
+
+mkdir -p $(dirname {{$key_file}})
+echo '{{ includeTemplate "keys.txt.tmpl" . }}' > {{$key_file}}

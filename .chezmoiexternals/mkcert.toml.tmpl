@@ -1,0 +1,14 @@
+
+{{ $mkcert_version := .packages.mkcert.version }}
+{{- if eq .chezmoi.os "linux" -}}
+[".local/bin/mkcert"]
+    type = "file"    
+    executable = true
+    url = "https://github.com/FiloSottile/mkcert/releases/download/v{{$mkcert_version}}/mkcert-v{{$mkcert_version}}-linux-amd64"
+
+{{ else if eq .chezmoi.os "windows" }}
+[".local/bin/mkcert.exe"]
+    type = "file"    
+    url = "https://github.com/FiloSottile/mkcert/releases/download/v{{$mkcert_version}}/mkcert-v{{$mkcert_version}}-windows-amd64.exe"
+
+{{ end }}

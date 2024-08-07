@@ -1,0 +1,5 @@
+{{- if eq .chezmoi.os "linux" -}}
+{{ includeTemplate (joinPath ".chezmoitemplates" "install_age.sh") . }}
+{{ else if eq .chezmoi.os "windows" }}
+{{ includeTemplate (joinPath ".chezmoitemplates" "install_age.bat") . }}
+{{- end }}

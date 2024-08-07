@@ -1,0 +1,12 @@
+{{- $sops_version := .packages.sops.version }}
+{{- if eq .chezmoi.os "linux" -}}
+[".local/bin/sops"]
+    type = "file"  
+    executable = true
+    url = "https://github.com/getsops/sops/releases/download/v{{$sops_version}}/sops-v{{$sops_version}}.linux.amd64"
+{{ else if eq .chezmoi.os "windows" }}
+[".local/bin/sops.exe"]
+    type = "file"    
+    url = "https://github.com/getsops/sops/releases/download/v{{$sops_version}}/sops-v{{$sops_version}}.exe"
+
+{{ end }}

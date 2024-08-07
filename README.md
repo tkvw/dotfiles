@@ -1,5 +1,13 @@
 # My dotfiles
 
+## Install
+
+on Wsl:
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply tkvw
+```
+
 ## Requirements
 
 - age
