@@ -1,10 +1,18 @@
 {{- $nushell_version := .packages.nushell.version -}}
 {{- if eq .chezmoi.os "linux" -}}
+{{- if eq .chezmoi.osRelease.id "alpine" -}}
+[".local/bin"]
+    type = "archive"
+    url = "https://github.com/nushell/nushell/releases/download/{{ $nushell_version }}/nu-{{ $nushell_version }}-x86_64-unknown-linux-musl.tar.gz"
+    stripComponents=1
+    exclude = ["*/LICENSE","*/README.txt"]
+{{ else }}
 [".local/bin"]
     type = "archive"
     url = "https://github.com/nushell/nushell/releases/download/{{ $nushell_version }}/nu-{{ $nushell_version }}-x86_64-unknown-linux-gnu.tar.gz"
     stripComponents=1
     exclude = ["*/LICENSE","*/README.txt"]
+{{ end }}
 {{ else if eq .chezmoi.os "windows" -}}
 [".local/bin"]
     type = "archive"
