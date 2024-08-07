@@ -2,11 +2,12 @@
 {{ $key_file := .chezmoi.config.age.identity | quote }}
 {{- if eq .chezmoi.os "linux" -}}
 #!/bin/sh
-
+echo "$keyfile: {{ $key_file }}"
 if [ -f {{ $key_file }} ]; then
-    exit
+    exit 0
 fi
 
+echo "dirname: $(dirname {{$key_file}})"
 mkdir -p $(dirname {{$key_file}})
 echo '{{ includeTemplate "keys.txt.tmpl" . }}' > {{$key_file}}
 
