@@ -3,6 +3,10 @@
 {{- $targets := list "windows" "wsl" "docker" -}}
 {{- $target := promptChoiceOnce . "target" "target" $targets -}}
 
+{{- $age_key := promptStringOnce . "age.key" "Age private key" -}}
+
+{{- $config := joinPath .chezmoi.homeDir ".config" }}
+
 [data]
     profile = {{ $profile | quote }}
     target = {{ $target | quote }}
@@ -15,16 +19,17 @@
     email = "dennie@artsystems.nl"
     signingkey = "asdennie.github.com.signing.pub"
 
+{{- if not (empty $age_key) }}
+[data.age]
+    key = {{$age_key | quote}}
+{{ end -}}
+
 {{- $recipients := list "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs" "age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms" }}
 encryption = "age"
 [age]
-    identity = {{ joinPath .chezmoi.homeDir ".config" "age" "master.key.txt" | quote }}
+    identity = {{ joinPath $config "sops" "age" "keys.txt" | quote }}
     recipients = [ {{ range $index,$recipient := $recipients }}{{- if $index }}, {{end}}{{ $recipient | quote -}} {{end}} ]
 
 [cd]
     command = "nu"
 
-{{ if ne $target "windows" -}}
-[hooks.read-source-state.pre]
-    command = ".local/share/chezmoi/.install-password-manager.sh"
-{{- end -}}

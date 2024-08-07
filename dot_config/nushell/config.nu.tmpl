@@ -895,15 +895,14 @@ $env.config = {
 use {{ joinPath $cache_folder "starship" "init.nu" | quote }}
 
 
-{{- $nu_scripts := joinPath .chezmoi.homeDir ".config" "nu_scripts" -}}
+{{- $nuconfig := joinPath .chezmoi.homeDir ".config" "nushell" -}}
 
-{{- $nu_aliases := joinPath $nu_scripts "aliases" }}
-source {{ joinPath $nu_aliases "chezmoi" "chezmoi-aliases.nu" | quote }}
-source {{ joinPath $nu_aliases "git" "git-aliases.nu" | quote }}
+{{- $nu_hooks := joinPath $nuconfig "nu-hooks" }}
 
-{{- $nu_hooks := joinPath $nu_scripts "nu-hooks" "nu-hooks" }}
+use {{ joinPath $nu_hooks "direnv.nu" | quote }}
 
-use {{ joinPath $nu_hooks "direnv" "direnv.nu" | quote }}
-source {{ joinPath $nu_hooks "filesystem" "autojump.nu" | quote }}
+if (which autojump | is-not-empty) {
+    source {{ joinPath $nu_hooks "autojump.nu" | quote }}
+}
 
-source {{ joinPath .chezmoi.homeDir ".config" "nushell" "aliases.nu"  | quote }}
+source {{ joinPath $nuconfig "aliases.nu"  | quote }}

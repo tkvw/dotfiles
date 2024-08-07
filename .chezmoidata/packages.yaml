@@ -1,9 +1,20 @@
 packages:
-  - package: nushell
-  - package: age
-  - package: starship
-  - package: autojump
-  - package: atuin
-  - package: sops
-  - package: mkcert
-  - package: git
+  age:
+    version: 1.2.0
+  nushell:
+    version: 0.96.1
+  starship:
+    version: 1.20.1
+  sops:
+    version: 3.9.0
+  mkcert:
+    version: 1.4.4
+  # - package: nushell
+  #   version: 0.96.1
+  # - package: age
+  # - package: starship
+  # - package: autojump
+  # - package: atuin
+  # - package: sops
+  # - package: mkcert
+  # - package: git
