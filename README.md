@@ -5,7 +5,9 @@
 on Wsl:
 
 ```sh
-sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply tkvw
+cd ~
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init tkvw
+chezmoi apply
 ```
 
 ## Requirements
