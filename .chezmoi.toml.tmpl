@@ -33,7 +33,3 @@ encryption = "age"
 [cd]
     command = "nu"
 
-{{ if eq .chezmoi.os "linux" -}}
-[interpreters.nu]
-    command = {{ joinPath .chezmoi.homeDir ".local" "bin" "nu" "nu" | quote }}
-{{- end }}
