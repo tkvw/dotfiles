@@ -3,11 +3,10 @@
 {{- $targets := list "windows" "wsl" "docker" -}}
 {{- $target := promptChoiceOnce . "target" "target" $targets -}}
 
-{{- $age_key := env "CHEZMOI_AGE_KEY" | default ((hasKey . "age.key") | ternary .age.key "") -}}
-{{- if ($age_key | empty ) -}}
-    $age_key := promptStringOnce . "age.key" "Age private key"
+{{- $age_key := env "CHEZMOI_AGE_KEY"  -}}
+{{- if ($age_key | empty ) }}
+{{-   $age_key = promptStringOnce . "age.key" "Age private key" }}
 {{- end -}}
-
 
 {{- $config := joinPath .chezmoi.homeDir ".config" }}
 
