@@ -119,3 +119,5 @@ fi
 if type starship &> /dev/null; then
     eval "$(starship init bash)"
 fi
+
+export CA_ROOT={{ joinPath .chezmoi.homeDir ".config" "mkcert" | quote }}
