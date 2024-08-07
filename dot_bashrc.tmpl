@@ -120,4 +120,4 @@ if type starship &> /dev/null; then
     eval "$(starship init bash)"
 fi
 
-export CA_ROOT={{ joinPath .chezmoi.homeDir ".local" "share" "mkcert" | quote }}
+export CAROOT={{ joinPath .chezmoi.homeDir ".local" "share" "mkcert" | quote }}
