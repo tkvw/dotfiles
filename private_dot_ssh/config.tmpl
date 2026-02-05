@@ -1,11 +1,9 @@
 {{- $ssh_dir := joinPath .chezmoi.homeDir ".ssh" -}}
+
 Host github.com
     User git
-{{- if eq .profile "work" }}    
-    IdentityFile {{ joinPath $ssh_dir "asdennie.github.com.git" | quote }}
-{{- else }}
     IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
-{{- end }}
+    IdentitiesOnly yes
 
 # Work
 Host github-work
@@ -14,12 +12,6 @@ Host github-work
   IdentityFile {{ joinPath $ssh_dir "asdennie.github.com.git" | quote }}
   IdentitiesOnly yes
 
-# Privé
-Host github-personal
-  HostName github.com
-  User git
-  IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
-  IdentitiesOnly yes
 
 {{- if eq .profile "home" }}
 Host ssh.delaserfrezer.com
