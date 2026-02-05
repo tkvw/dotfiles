@@ -1,0 +1,7 @@
+[user]
+	name = {{ .git.name }}
+	email = {{ .git.work.email }}
+	signingkey = {{ joinPath .chezmoi.homeDir ".ssh" .git.work.signingkey | quote  }}
+
+[url "git@github-work:"]
+  insteadOf = git@github.com:

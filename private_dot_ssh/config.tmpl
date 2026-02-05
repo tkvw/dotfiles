@@ -7,6 +7,20 @@ Host github.com
     IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
 {{- end }}
 
+# Work
+Host github-work
+  HostName github.com
+  User git
+  IdentityFile {{ joinPath $ssh_dir "asdennie.github.com.git" | quote }}
+  IdentitiesOnly yes
+
+# Privé
+Host github-personal
+  HostName github.com
+  User git
+  IdentityFile {{ joinPath $ssh_dir "tkvw.github.com.git" | quote }}
+  IdentitiesOnly yes
+
 {{- if eq .profile "home" }}
 Host ssh.delaserfrezer.com
   Port 18765

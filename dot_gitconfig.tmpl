@@ -5,9 +5,8 @@
 
 [user]
 	name = {{ .git.name }}
-	{{- $git := eq .profile "work" | ternary .git.work .git.home }}
-	email = {{ $git.email }}
-	signingkey = {{ joinPath .chezmoi.homeDir ".ssh" $git.signingkey | quote  }}
+	email = {{ .git.home.email }}
+	signingkey = {{ joinPath .chezmoi.homeDir ".ssh" .git.home.signingkey | quote  }}
 
 [init]
 	defaultBranch = main
@@ -19,3 +18,6 @@
 
 [commit]
 	gpgsign = true
+
+[includeIf "gitdir:~/src/github.com/asdennie/"]
+  path = ~/.gitconfig-work

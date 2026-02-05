@@ -34,5 +34,5 @@ encryption = "age"
     recipients = [ {{ range $index,$recipient := $recipients }}{{- if $index }}, {{end}}{{ $recipient | quote -}} {{end}} ]
 
 [cd]
-    command = "nu"
+    command = "pwsh"
 
