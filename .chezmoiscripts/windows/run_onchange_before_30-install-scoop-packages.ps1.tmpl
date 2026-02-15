@@ -1,2 +1,3 @@
-{{- $scoop := joinPath .chezmoi.homeDir "scoop" "shims" "scoop.cmd" | quote }}
-{{- $scoop }} install mise nu
+$env:PATH = [Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [Environment]::GetEnvironmentVariable("PATH", "Machine")
+
+scoop install mise nu
