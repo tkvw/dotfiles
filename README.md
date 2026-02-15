@@ -23,7 +23,7 @@ chezmoi apply
 - scoop
 
 ```
-
+- iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply tkvw"
 ```
 
 ### Linux

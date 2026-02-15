@@ -3,7 +3,7 @@
 	email = "621098+tkvw@users.noreply.github.com"
 	signingkey = ~/.ssh/signing_keys/tkvw.github.com
 
-[url "git@asdennie.github.com:"]
+[url "git@tkvw.github.com:"]
   insteadOf = git@github.com:
 
 
