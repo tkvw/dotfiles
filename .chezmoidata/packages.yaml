@@ -1,20 +1,17 @@
 packages:
-  age:
-    version: 1.2.0
-  nushell:
-    version: 0.96.1
-  starship:
-    version: 1.20.1
-  sops:
-    version: 3.9.0
-  mkcert:
-    version: 1.4.4
-  # - package: nushell
-  #   version: 0.96.1
-  # - package: age
-  # - package: starship
-  # - package: autojump
-  # - package: atuin
-  # - package: sops
-  # - package: mkcert
-  # - package: git
+  - name: nushell # modern shell with structured data support
+    scoop: nu
+  - name: starship # cross-shell prompt
+  - name: age # file encryption tool
+  - name: sops # encrypted secrets manager for config files
+  - name: mkcert # local TLS certificate generator
+  - name: git # version control
+  - name: atuin # shell history search and sync
+  - name: zoxide # smarter cd that learns your most used directories
+  - name: fd # fast file finder (find alternative)
+  - name: carapace # multi-shell completion engine
+    scoop: extras/carapace-bin
+    scoop_bucket: extras
+  - name: bottom # system monitor (top/htop alternative)
+  - name: delta # syntax-highlighting diff viewer for git
+  - name: ripgrep # fast recursive text search (grep alternative)

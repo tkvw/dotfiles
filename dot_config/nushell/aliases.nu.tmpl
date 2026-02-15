@@ -1,8 +1,0 @@
-{{- $profiles := list "work" "home" -}}
-{{- $targets := list "windows" "wsl" "docker" -}}
-
-{{- range $profile := $profiles -}}
-{{- range $target := $targets -}}
-export alias ch-{{$target}}-{{$profile}} = chezmoi init --promptChoice profile={{$profile}} --promptChoice target={{$target}} --apply
-{{ end -}}
-{{- end -}}

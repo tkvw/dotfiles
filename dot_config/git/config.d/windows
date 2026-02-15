@@ -1,0 +1,8 @@
+[core]
+# escaping required because of shell interpretation of backslashes and spaces in path
+  sshCommand = \"C:/Program Files/OpenSSH/ssh.exe\"
+
+[gpg "ssh"]
+# escaping *NOT* required because it's invoked using exec from within git
+  program = "C:/Program Files/OpenSSH/ssh-keygen.exe"
+

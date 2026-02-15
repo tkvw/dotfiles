@@ -1,2 +1,13 @@
+CLAUDE.md
 README.md
 
+{{- if ne .chezmoi.os "windows" }}
+.chezmoiscripts/windows/*
+{{ end }}
+{{- if ne .chezmoi.os "linux" }}
+.chezmoiscripts/linux/*
+{{ end }}
+
+{{- if not .age }}
+**/encrypted_*
+{{- end }}

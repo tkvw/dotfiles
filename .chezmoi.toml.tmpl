@@ -1,38 +1,23 @@
-{{- $profiles := list "work" "home" -}}
-{{- $profile := promptChoice "profile" $profiles ( env "CHEZMOI_PROFILE" | default "home" ) -}}
-{{- $targets := list "windows" "wsl" "docker" -}}
-{{- $target := promptChoiceOnce . "target" "target" $targets -}}
+{{- $chezmoi_age_file := "~/.config/age/chezmoi.txt" -}}
 
-{{- $age_key := env "CHEZMOI_AGE_KEY"  -}}
-{{- if ($age_key | empty ) }}
-{{-   $age_key = promptStringOnce . "age.key" "Age private key" }}
-{{- end -}}
-
-{{- $config := joinPath .chezmoi.homeDir ".config" }}
-
-[data]
-    profile = {{ $profile | quote }}
-    target = {{ $target | quote }}
-[data.git]
-    name = "Dennie de Lange"
-[data.git.home]
-    email = "621098+tkvw@users.noreply.github.com"
-    signingkey = "tkvw.github.com.signing.pub"
-[data.git.work]
-    email = "dennie@artsystems.nl"
-    signingkey = "asdennie.github.com.signing.pub"
-
-{{- if not (empty $age_key) }}
-[data.age]
-    key = {{$age_key | quote}}
-{{ end -}}
-
-{{- $recipients := list "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs" "age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms" }}
 encryption = "age"
 [age]
-    identity = {{ joinPath $config "sops" "age" "keys.txt" | quote }}
-    recipients = [ {{ range $index,$recipient := $recipients }}{{- if $index }}, {{end}}{{ $recipient | quote -}} {{end}} ]
+    identity = "{{ $chezmoi_age_file }}"
+    recipients = [
+      "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs",
+      "age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms"
+    ]
 
 [cd]
-    command = "pwsh"
+    command = "nu"
 
+[interpreters.ps1]
+  command = "pwsh"
+  args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
+
+{{ $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
+{{ $isDocker := stat "/.dockerenv" | not | not -}}
+[data]
+  wsl = {{ $isWsl }}
+  age = {{ stat $chezmoi_age_file | not | not }}
+  docker = {{ $isDocker }}

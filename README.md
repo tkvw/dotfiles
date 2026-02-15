@@ -34,3 +34,7 @@ chezmoi apply
 
 [ ] - Auto install required software
 [ ] - Make compatible with widows
+
+# SSH
+
+Use the ssh agent of bitwarden and disable the ssh agent of windows.

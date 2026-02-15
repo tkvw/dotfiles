@@ -1,0 +1,29 @@
+[core]
+	excludesFile = ~/.config/git/gitignore
+	autocrlf = input
+	eol = lf
+
+[init]
+	defaultBranch = main
+[safe]
+	directory = *
+
+[gpg]
+	format = ssh
+
+[commit]
+	gpgsign = true
+
+[include]
+  path = ~/.config/git/config.d/tkvw
+{{- if eq .chezmoi.os "windows" }}
+  path = ~/.config/git/config.d/windows
+{{ end -}}
+{{- if .wsl }}
+  path = ~/.config/git/config.d/wsl
+{{ end }}
+[includeIf "gitdir:~/src/github.com/asdennie/"]
+  path = ~/.config/git/config.d/asdennie
+
+[includeIf "gitdir:~/src/github.com/artsystems/"]
+  path = ~/.config/git/config.d/asdennie
