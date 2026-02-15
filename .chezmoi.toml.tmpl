@@ -12,7 +12,8 @@ encryption = "age"
     command = "nu"
 
 [interpreters.ps1]
-  command = "{{ .chezmoi.config.interpreters.ps1.command }}"
+{{- if not (lookPath "pwsh") }}
+  command = "powershell"
   args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
 
 {{ $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
