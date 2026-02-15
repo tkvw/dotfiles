@@ -9,20 +9,22 @@ foreach ($entry in $xdgVars.GetEnumerator()) {
     [Environment]::SetEnvironmentVariable($entry.Key, $entry.Value, "User")
     Write-Host "Set $($entry.Key) to $($entry.Value)"
 }
-
 $pathsToAdd = @(
     [IO.Path]::Combine($env:USERPROFILE, ".local", "bin")
     [IO.Path]::Combine($env:USERPROFILE, "scoop", "shims")
-    # voeg hier meer paden toe
 )
+
 $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-$existing = $currentPath -split ";" | Where-Object { $_.Trim() -ne "" }
+if ([string]::IsNullOrWhiteSpace($currentPath)) {
+    $existing = @()
+} else {
+    $existing = @($currentPath -split ";" | Where-Object { $_.Trim() -ne "" })
+}
 
 $added = @()
 foreach ($p in $pathsToAdd) {
-    # Case-insensitive vergelijking + genormaliseerde paden
-    $normalizedExisting = $existing | ForEach-Object { $_.TrimEnd("\") }
-    $normalizedP = $p.TrimEnd("\")
+    $normalizedExisting = $existing | ForEach-Object { $_.TrimEnd("\").ToLower() }
+    $normalizedP = $p.TrimEnd("\").ToLower()
     if ($normalizedExisting -notcontains $normalizedP) {
         $existing += $p
         $added += $p
@@ -30,6 +32,11 @@ foreach ($p in $pathsToAdd) {
 }
 
 if ($added.Count -gt 0) {
-    $newPath = ($existing -join ";").TrimEnd(";")
+    $newPath = ($existing -join ";")
     [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
+    foreach ($a in $added) {
+        Write-Host "Added to PATH: $a"
+    }
+} else {
+    Write-Host "PATH already up to date."
 }
