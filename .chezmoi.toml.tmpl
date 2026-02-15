@@ -12,7 +12,7 @@ encryption = "age"
     command = "nu"
 
 [interpreters.ps1]
-  command = "{{ .chezmoi.interpreters.ps1.command }}"
+  command = "{{ .chezmoi.config.interpreters.ps1.command }}"
   args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
 
 {{ $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
