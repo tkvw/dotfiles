@@ -11,14 +11,6 @@ encryption = "age"
 [cd]
     command = "nu"
 
-[interpreters.ps1]
-{{- if not (lookPath "pwsh") }}
-  command = "powershell"
-{{- else }}
-  command = "pwsh"
-{{- end }}
-  args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
-
 {{ $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
 {{ $isDocker := stat "/.dockerenv" | not | not -}}
 [data]

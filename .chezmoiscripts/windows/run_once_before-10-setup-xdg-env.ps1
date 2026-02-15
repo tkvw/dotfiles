@@ -15,24 +15,21 @@ $pathsToAdd = @(
     [IO.Path]::Combine($env:USERPROFILE, "scoop", "shims")
     # voeg hier meer paden toe
 )
-
 $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")
-$existing = $currentPath -split ";" | Where-Object { $_ -ne "" }
+$existing = $currentPath -split ";" | Where-Object { $_.Trim() -ne "" }
 
 $added = @()
 foreach ($p in $pathsToAdd) {
-    if ($existing -notcontains $p) {
+    # Case-insensitive vergelijking + genormaliseerde paden
+    $normalizedExisting = $existing | ForEach-Object { $_.TrimEnd("\") }
+    $normalizedP = $p.TrimEnd("\")
+    if ($normalizedExisting -notcontains $normalizedP) {
         $existing += $p
         $added += $p
     }
 }
 
 if ($added.Count -gt 0) {
-    $newPath = ($existing -join ";")
+    $newPath = ($existing -join ";").TrimEnd(";")
     [Environment]::SetEnvironmentVariable("PATH", $newPath, "User")
-    foreach ($a in $added) {
-        Write-Host "Added to PATH: $a"
-    }
-} else {
-    Write-Host "PATH already up to date."
 }
