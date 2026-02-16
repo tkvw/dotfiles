@@ -1,11 +1,16 @@
 {{- $chezmoi_age_file := "~/.config/age/chezmoi.txt" -}}
+{{- $wslHomedir := "" -}}
+{{- if .wsl -}}
+{{- $wslHomedir = (output "bash" "-c" "wslpath \"$(powershell.exe -NoProfile -Command 'Write-Host $env:USERPROFILE' | tr -d '\\r')\"" | trim) -}}
+{{- end -}}
 
 encryption = "age"
+
 [age]
 {{- if not .wsl }}
     identity = "{{ $chezmoi_age_file }}"
 {{- else }}
-    identity = {{ output "wslpath" .chezmoi.homeDir | trim | quote }}
+    identity = {{ printf "%s/.config/age/chezmoi.txt" $wslHomedir | quote }}
 {{- end }}
     recipients = [
       "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs",
