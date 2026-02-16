@@ -2,7 +2,7 @@
 
 encryption = "age"
 [age]
-{{- if not wsl }}
+{{- if not .wsl }}
     identity = "{{ $chezmoi_age_file }}"
 {{- else }}
     identity = {{ output "wslpath" (env "USERPROFILE") | trim | quote }}
