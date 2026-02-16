@@ -9,7 +9,7 @@
 encryption = "age"
 
 [age]
-{{- if not .wsl }}
+{{- if not $isWsl }}
     identity = "{{ $chezmoi_age_file }}"
 {{- else }}
     identity = {{ printf "%s/.config/age/chezmoi.txt" $wslHomedir | quote }}
