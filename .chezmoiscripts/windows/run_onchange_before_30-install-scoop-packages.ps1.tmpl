@@ -1,3 +1,5 @@
 $env:PATH = [Environment]::GetEnvironmentVariable("PATH", "User") + ";" + [Environment]::GetEnvironmentVariable("PATH", "Machine")
 
-scoop install mise nu
+scoop install mise nu git
+scoop bucket add extras
+scoop install vcredist2022 bitwarden

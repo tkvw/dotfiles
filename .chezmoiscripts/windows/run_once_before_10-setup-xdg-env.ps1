@@ -11,6 +11,7 @@ foreach ($entry in $xdgVars.GetEnumerator()) {
 }
 $pathsToAdd = @(
     [IO.Path]::Combine($env:USERPROFILE, ".local", "bin")
+    [IO.Path]::Combine($env:USERPROFILE, ".local", "share", "mise", "shims")
     [IO.Path]::Combine($env:USERPROFILE, "scoop", "shims")
 )
 

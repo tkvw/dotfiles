@@ -1,0 +1,5 @@
+[tools]
+sops = "latest"
+
+[env]
+SOPS_AGE_KEY_FILE = "~/.config/age/sops.txt"
