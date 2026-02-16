@@ -1,0 +1,15 @@
+{
+  "extras": [
+    "lazyvim.plugins.extras.ai.copilot",
+    "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.lang.dotnet",
+    "lazyvim.plugins.extras.lang.nushell",
+    "lazyvim.plugins.extras.lang.svelte",
+    "lazyvim.plugins.extras.lang.typst"
+  ],
+  "install_version": 8,
+  "news": {
+    "NEWS.md": "11866"
+  },
+  "version": 8
+}
