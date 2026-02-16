@@ -23,7 +23,13 @@ chezmoi apply
 - scoop
 
 ```
-- iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply tkvw"
+iex "&{$(irm 'https://get.chezmoi.io/ps1')} -b '~/.local/bin' -- init --apply tkvw"
+```
+
+# Wsl installation
+
+```
+sh -c "$(curl -fsLS get.chezmoi.io/lb)" -- init --apply tkvw
 ```
 
 ### Linux
