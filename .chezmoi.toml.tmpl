@@ -1,5 +1,6 @@
 {{- $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
 {{- $isDocker := stat "/.dockerenv" | not | not -}}
+{{- $chezmoi_age_file := "~/.config/age/chezmoi.txt" -}}
 {{- $wslHomedir := "" -}}
 {{- if $isWsl -}}
 {{- $wslHomedir = (output "bash" "-c" "wslpath \"$(powershell.exe -NoProfile -Command 'Write-Host $env:USERPROFILE' | tr -d '\\r')\"" | trim) -}}
@@ -9,7 +10,7 @@ encryption = "age"
 
 [age]
 {{- if not .wsl }}
-    identity = "~/.config/age/chezmoi.txt"
+    identity = "{{ $chezmoi_age_file }}"
 {{- else }}
     identity = {{ printf "%s/.config/age/chezmoi.txt" $wslHomedir | quote }}
 {{- end }}
