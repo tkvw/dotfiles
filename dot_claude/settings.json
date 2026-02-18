@@ -14,5 +14,8 @@
     "csharp-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true
   },
-  "promptSuggestionEnabled": false
+  "promptSuggestionEnabled": false,
+  "permissions": {
+    "defaultMode": "plan"
+  }
 }
