@@ -6,4 +6,5 @@
 [url "git@tkvw.github.com:"]
   insteadOf = git@github.com:
 
-
+[url "git@tkvw.github.com:/tkvw/"]
+    insteadOf = https://github.com/tkvw/
