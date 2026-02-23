@@ -21,7 +21,7 @@
 {{- if eq .chezmoi.os "windows" }}
   path = ~/.config/git/config.d/windows
 {{ end -}}
-{{- if .wsl }}
+{{- if .is_wsl }}
   path = ~/.config/git/config.d/wsl
 {{ end }}
 [includeIf "gitdir:~/src/github.com/asdennie/"]

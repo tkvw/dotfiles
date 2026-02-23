@@ -1,19 +1,8 @@
-{{- $isWsl := and (eq .chezmoi.os "linux") (contains "microsoft" (lower .chezmoi.kernel.osrelease)) -}}
-{{- $isDocker := stat "/.dockerenv" | not | not -}}
-{{- $chezmoi_age_file := "~/.config/age/chezmoi.txt" -}}
-{{- $wslHomedir := "" -}}
-{{- if $isWsl -}}
-{{- $wslHomedir = (output "bash" "-c" "wslpath \"$(powershell.exe -NoProfile -Command 'Write-Host $env:USERPROFILE' | tr -d '\\r')\"" | trim) -}}
-{{- end -}}
-
 encryption = "age"
 
+{{- $age_identity_path := includeTemplate "age_identity" . | trim }}
 [age]
-{{- if not $isWsl }}
-    identity = "{{ $chezmoi_age_file }}"
-{{- else }}
-    identity = {{ printf "%s/.config/age/chezmoi.txt" $wslHomedir | quote }}
-{{- end }}
+    identity = {{ $age_identity_path | quote }}
     recipients = [
       "age139tak66akncp4xddr9snd6f6gqq6t056hkjcn604uvyklte28acsqcyncs",
       "age1uj4hw4smpe8h49yc8l3lkpxga0upx9a5380mky32uz5qlatcdyaq9xzqms"
@@ -23,16 +12,13 @@ encryption = "age"
     command = "nu"
 
 [interpreters.ps1]
-{{- if not (lookPath "pwsh") }}
-  command = "powershell"
-{{- else }}
-  command = "pwsh"
-{{- end }}
+  command = {{ includeTemplate "interpreters_ps1_command" . | trim | quote }}
   args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
 
 [data]
-  wsl = {{ $isWsl }}
-  age = {{ stat $chezmoi_age_file | not | not }}
-  docker = {{ $isDocker }}
+  is_wsl = {{ includeTemplate "is_wsl" . | trim }}
+  age = {{ stat $age_identity_path | not | not }}
+  docker = {{ includeTemplate "is_docker" . | trim }}
   is_win = {{ eq .chezmoi.os "windows" | not | not }}
   is_linux = {{ eq .chezmoi.os "linux" | not | not }}
+  is_win_sandbox = {{ includeTemplate "is_windows_sandbox" . | trim }}

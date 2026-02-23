@@ -7,7 +7,7 @@ README.md
 {{- if ne .chezmoi.os "linux" }}
 .chezmoiscripts/linux/*
 {{ end }}
-{{- if not .wsl }}
+{{- if not .is_wsl }}
 .chezmoiscripts/wsl/*
 {{ else }}
 ~/.config/mise/conf.d/bitwarden.conf

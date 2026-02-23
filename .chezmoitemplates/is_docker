@@ -1,0 +1,2 @@
+
+{{- stat "/.dockerenv" | not | not -}}

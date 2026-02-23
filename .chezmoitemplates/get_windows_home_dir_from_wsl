@@ -1,0 +1,2 @@
+
+{{-     output "wslpath" "-a" (output "cmd.exe" "/C" "echo %USERPROFILE%" | trim) | trim -}}

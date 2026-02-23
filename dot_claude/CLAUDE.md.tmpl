@@ -8,10 +8,10 @@
 {{ if eq .chezmoi.os "windows" -}}
 - You are running in Windows 11
 - You use git bash as your shell, keep in mind proper escaping for git bash when running commands.
-{{ else if .wsl -}}
+{{ else if .is_wsl -}}
 - You are running in Ubuntu 24 in WSL on windows
 {{ end -}}
-- My shell is nushell, you don't need to use it, but if you present a cmdline snippet to me *DO* use it. 
+- My shell is nushell, you don't need to use it, but if you present a cmdline snippet to me *DO* use it.
 - My preferred editor is nvim (LazyVim)
 - I use pnpm package manager instead of npm or yarn.
 

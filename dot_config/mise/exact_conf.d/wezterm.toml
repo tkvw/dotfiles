@@ -1,0 +1,8 @@
+
+# mise.toml
+[tools."http:wezterm"]
+version = "nightly"
+
+[tools."http:wezterm".platforms]
+windows-x64 = { url = "https://github.com/wezterm/wezterm/releases/download/nightly/WezTerm-windows-nightly.zip" }
+linux-x64 = { url = "https://github.com/wezterm/wezterm/releases/download/nightly/wezterm-nightly.Ubuntu20.04.tar.xz" }

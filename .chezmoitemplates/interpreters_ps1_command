@@ -1,0 +1,6 @@
+{{- if not (lookPath "pwsh") }}
+  powershell
+{{- else }}
+  pwsh
+{{- end }}
+

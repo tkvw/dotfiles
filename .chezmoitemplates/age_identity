@@ -1,0 +1,9 @@
+{{- $is_wsl := eq (includeTemplate "is_wsl" .) "true" -}}
+{{- if $is_wsl -}}
+{{/* use the identitykey from the windows host*/}}
+{{- $home = includeTemplate "get_windows_home_dir_from_wsl" . | trim -}}
+{{ printf "%s/.config/age/chezmoi.txt" $home }}
+{{- else -}}
+~/.config/age/chezmoi.txt
+{{- end -}}
+
