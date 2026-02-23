@@ -34,3 +34,5 @@ encryption = "age"
   wsl = {{ $isWsl }}
   age = {{ stat $chezmoi_age_file | not | not }}
   docker = {{ $isDocker }}
+  is_win = {{ eq .chezmoi.os "windows" | not | not }}
+  is_linux = {{ eq .chezmoi.os "linux" | not | not }}

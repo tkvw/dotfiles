@@ -28,8 +28,8 @@ local function platform()
 		mod.SUPER = "SUPER"
 		mod.SUPER_REV = "SUPER|CTRL"
 	elseif is_win or is_linux then
-		mod.SUPER = "ALT"
-		mod.SUPER_REV = "ALT|CTRL"
+		mod.SUPER = "ALT|CTRL"
+		mod.SUPER_REV = "ALT|CTRL|SHIFT"
 	end
 	return {
 		os = os,

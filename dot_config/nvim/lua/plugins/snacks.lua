@@ -5,8 +5,8 @@ return {
       picker = {
         sources = {
           explorer = {
-            hidden = true, -- toont .dotfiles
-            ignored = false, -- toont gitignored files
+            hidden = true, -- show .dotfiles
+            ignored = false, -- show gitignored files
           },
           files = {
             hidden = true,

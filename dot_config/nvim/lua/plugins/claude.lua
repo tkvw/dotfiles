@@ -1,6 +1,7 @@
 return {
   {
     "coder/claudecode.nvim",
+    enabled = false,
     opts = {},
     keys = {
       { "<leader>aa", "", desc = "+Antrophic Claude", mode = { "n", "v" } },

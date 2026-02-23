@@ -1,0 +1,17 @@
+{{ if .is_win }}
+
+  [".local/bin/kanata.exe"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "jtroo/kanata" (printf "%s-binaries-x64.zip" .chezmoi.os)|quote }}
+      path = "kanata_windows_gui_winIOv2_x64.exe"
+      executable = true
+
+{{ else if .is_linux }}
+  [".local/bin/kanata"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "jtroo/kanata" (printf "%s-binaries-x64.zip" .chezmoi.os)| quote }}
+      executable = true
+      path = "kanata_linux_x64"
+      
+{{ end }}
+

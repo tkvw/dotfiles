@@ -1,0 +1,28 @@
+{{ if .is_win }}
+
+  [".local/bin/age.exe"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.zip" .chezmoi.os .chezmoi.arch) | quote }}
+      executable = true
+      path = "age/age.exe"
+
+  [".local/bin/age-keygen.exe"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.zip" .chezmoi.os .chezmoi.arch) | quote }}
+      executable = true
+      path = "age/age-keygen.exe"
+
+{{ else if .is_linux }}
+  [".local/bin/age"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+      executable = true
+      path = "age/age"
+
+  [".local/bin/age-keygen"]
+      type = "archive-file"
+      url = {{ gitHubLatestReleaseAssetURL "FiloSottile/age" (printf "age-*-%s-%s.tar.gz" .chezmoi.os .chezmoi.arch) | quote }}
+      executable = true
+      path = "age/age-keygen"
+
+{{ end }}

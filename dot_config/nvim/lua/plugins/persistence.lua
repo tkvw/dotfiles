@@ -11,6 +11,7 @@ return {
   {
     "rmagatti/auto-session",
     lazy = false,
+    enabled = false,
     ---@module "auto-session"
     ---@type AutoSession.Config
     opts = {
@@ -24,5 +25,5 @@ return {
         end,
       },
     },
-  }
+  },
 }
