@@ -1,0 +1,11 @@
+[tools]
+watchexec = "latest"
+
+[tasks.apply]
+description = "Apply chezmoi changes"
+run = "chezmoi apply"
+
+[tasks.watch]
+description = "Watch for dotfile changes and auto-apply"
+sources = ["dot_*/**/*", "dot_*"]
+run = "mise watch apply"

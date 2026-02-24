@@ -4,4 +4,3 @@
 winget install Microsoft.VisualStudio.2022.BuildTools --override "--passive --wait --add Microsoft.VisualStudio.Component.VC.Tools.x86.x64 --add Microsoft.VisualStudio.Component.Windows11SDK.22621"
 {{- end }}
 
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
