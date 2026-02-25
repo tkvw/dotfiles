@@ -15,3 +15,46 @@ if (which carapace | is-not-empty) {
 if (which mise | is-not-empty) {
   mise activate nu | save -f ($nu.data-dir | path join "vendor/autoload/mise.nu")
 }
+$env.config.edit_mode = 'vi'
+$env.PROMPT_INDICATOR_VI_NORMAL = ''
+$env.PROMPT_INDICATOR_VI_INSERT = ''
+$env.config.cursor_shape = {
+  vi_normal : 'block'
+  vi_insert : 'line'
+}
+$env.config.keybindings ++= [{
+    name: fzf_history
+    modifier: control
+    keycode: char_r
+    mode: [emacs, vi_normal, vi_insert]
+    event: {
+        send: executehostcommand
+        cmd: "commandline edit (
+            history
+            | get command
+            | uniq
+            | reverse
+            | str join (char nl)
+            | fzf --layout=reverse --height=40% -q (commandline)
+            | decode utf-8
+            | str trim
+        )"
+    }
+}
+  # Ctrl+Y: fzf cd naar recente directories
+    {
+        name: fzf_dirs
+        modifier: control
+        keycode: char_y
+        mode: [emacs, vi_normal, vi_insert]
+        event: {
+            send: executehostcommand
+            cmd: "let result = (
+                zoxide query --list
+                | fzf --layout=reverse --height=40%
+                | decode utf-8
+                | str trim
+            );
+            if ($result | is-not-empty) { cd $result }"
+        }
+    }]

@@ -4,31 +4,41 @@
 ================================================================================
 
   Key ideas:
-  1. CapsLock → Escape (tap) / Editing layer (hold)
-     - h = Backspace, j = Delete, k = Enter
-  2. Home Row Modifiers on S, D, F and J, K, L
+  1. CapsLock → Escape (tap only, no hold layer)
+  2. Home Row Modifiers: A=Sym, S=Alt, D=Ctrl, F=Shift | J=Shift, K=Ctrl, L=Alt, ;=Sym-extra
   3. Space → Space (tap) / Navigation layer (hold)
   4. A → a (tap) / Symbols layer (hold) — right hand types symbols
-  5. A + F → Symbol extra layer — remaining symbols on right hand
-  6. ; → ; (tap) / Function keys layer (hold) — left hand types F-keys
-  7. X → x (tap) / Mouse fast layer (hold) — large cursor jumps
-  8. C → c (tap) / Mouse slow layer (hold) — precise cursor movement
-  9. lctl (bottom left) becomes lmet for Windows shortcuts
-  10. ralt becomes Backspace for easy reach
+  5. ; → ; (tap) / Symbol extra layer (hold) — left hand types remaining symbols
+  6. X → x (tap) / Mouse fast layer (hold) — large cursor jumps
+  7. C → c (tap) / Mouse slow layer (hold) — precise cursor movement
+  8. ralt → Backspace (tap) / Function keys layer (hold)
+  9. lctl → lmet (Windows key for shortcuts)
+
+  Combos (simultaneous key presses):
+    a+s = Tab    s+d = Esc    j+k = Backspace   k+l = Delete
+    f+d = Enter  e+r = -      f+j = Caps Word
 
   Symbol layers overview (hold A, type right hand):
 
-  sym:        ~  [  ]  $  &  #        sym-extra:     !  &  ^  $  ?
-              (  {  }  )                              %  -  +  *  =  _
-              `  <  >
+  sym (hold A):              sym-extra (hold ;):
+        ^  [  ]  &                 !  &  #  $
+        (  {  }  )  _           ~  %  -  +  =
+        `  <  >
+
+  Nav layer (hold Space):
+        right hand: mlft ←mouse ↓mouse ↑mouse →mouse mrgt
+                    ←    ↓      ↑      →
+                    home pgdn   pgup   end
 
   Mouse layers (hold X = fast, hold C = slow):
+        y=lclick  u=scrolldn  i=scrollup  o=rclick
+        h=left    j=down      k=up        l=right
+        m=midclick
 
-              y=lclick  u=scrolldn  i=scrollup  o=rclick
-              h=left    j=down      k=up        l=right
-              m=midclick
-
-  Exit Kanata: hold Left Control + Space + Escape simultaneously
+  Function keys layer (hold ralt/Backspace):
+        F1-F5   | F6-F10 F11
+        1-5     | 6-9 0  F12
+        mute vold volu play
 
 ================================================================================
 |#
@@ -39,7 +49,7 @@
 )
 
 (defvar
-  tt 150   ;; tap timeout (ms)
+  tt 200   ;; tap timeout (ms)
   ht 200   ;; hold timeout (ms)
 )
 
@@ -87,14 +97,14 @@
 ;; Mouse aliases
 ;; ---------------------------------------------------------------------------
 (defalias
-  ;; Fast mouse — large jumps across screen
+  ;; Fast mouse — accelerated movement for large jumps
   ;; movemouse-accel: interval(ms)  accel-time(ms)  min-dist(px)  max-dist(px)
   mfu (movemouse-accel-up    1 1000 1 20)
   mfd (movemouse-accel-down  1 1000 1 20)
   mfl (movemouse-accel-left  1 1000 1 20)
   mfr (movemouse-accel-right 1 1000 1 20)
 
-  ;; Slow mouse — precise pixel movement
+  ;; Slow mouse — precise 1px movement
   ;; movemouse: interval(ms)  distance(px)
   msu (movemouse-up    50 1)
   msd (movemouse-down  50 1)
@@ -110,18 +120,10 @@
 ;; Behaviour aliases
 ;; ---------------------------------------------------------------------------
 (defalias
-  ;; === CapsLock → Escape (tap) / Editing layer (hold) ===
-  ;; Tap for Esc (leave insert mode), hold for quick editing keys.
-  ;; Ctrl is still available via D home row mod.
-  ec (tap-hold-release $tt $ht esc (layer-toggle edit))
-
-  ;; === A → a (tap) / Symbols layer (hold) ===
+  ;; A → a (tap) / Symbols layer (hold)
   a-mod (tap-hold-release $tt $ht a (layer-toggle sym))
 
-  ;; === F on sym layer → activates sym-extra layer ===
-  f-ext (layer-toggle sym-extra)
-
-  ;; === Home Row Modifiers ===
+  ;; Home Row Modifiers (GACS: Sym-Alt-Ctrl-Shift)
   s-mod (tap-hold-release $tt $ht s lalt)
   d-mod (tap-hold-release $tt $ht d lctl)
   f-mod (tap-hold-release $tt $ht f lsft)
@@ -129,19 +131,23 @@
   k-mod (tap-hold-release $tt $ht k rctl)
   l-mod (tap-hold-release $tt $ht l lalt)
 
-  ;; === ; → ; (tap) / Function keys layer (hold) ===
-  ;-mod (tap-hold-release $tt $ht ; (layer-toggle fn))
+  ;; ; → ; (tap) / Symbol extra layer (hold)
+  ;-mod (tap-hold-release $tt $ht ; (layer-toggle sym-extra))
 
-  ;; === Space → Space (tap) / Navigation layer (hold) ===
+  ;; Space → Space (tap) / Navigation layer (hold)
   spc-mod (tap-hold-release $tt $ht spc (layer-toggle nav))
 
-  ;; === X → x (tap) / Mouse fast layer (hold) ===
-  ;; Large jumps for quickly moving across the screen
+  ;; X → x (tap) / Mouse fast layer (hold)
   x-mod (tap-hold-release $tt $ht x (layer-toggle mouse-fast))
 
-  ;; === C → c (tap) / Mouse slow layer (hold) ===
-  ;; Small precise movements for clicking targets
+  ;; ralt position: Backspace (tap) / Function keys layer (hold)
+  bspc-mod (tap-hold-release $tt $ht bspc (layer-toggle fn))
+
+  ;; C → c (tap) / Mouse slow layer (hold)
   c-mod (tap-hold-release $tt $ht c (layer-toggle mouse-slow))
+
+  ;; Caps Word — auto-uppercase until space/punctuation (2s timeout)
+  cw (caps-word 2000)
 )
 
 ;; ---------------------------------------------------------------------------
@@ -158,131 +164,91 @@
 ;; ---------------------------------------------------------------------------
 ;; Base layer
 ;; ---------------------------------------------------------------------------
+;;  caps → esc | home row mods | lctl → lmet | ralt → bspc/fn
+;;
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  @a-mod @s-mod @d-mod @f-mod g h  @j-mod @k-mod @l-mod @;-mod ' ret
+  esc  @a-mod @s-mod @d-mod @f-mod g h  @j-mod @k-mod @l-mod @;-mod ' ret
   lsft z    @x-mod @c-mod v    b    n    m    ,    .    /    rsft
-  lmet lmet lalt           @spc-mod       bspc rmet rctl
+  lmet lmet lalt           @spc-mod       @bspc-mod rmet rctl
 )
 
-;; ---------------------------------------------------------------------------
-;; Editing layer (hold CapsLock)
-;; ---------------------------------------------------------------------------
-;; Quick access to Backspace, Delete, and Enter without leaving home row.
-;;
-;;        h      j      k
-;;        bspc   del    ret
-;;
-(deflayer edit
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    bspc del  ret  _    _    _    _
-  _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _              _              _    _    _
+(defchordsv2
+  (a s)      tab       40 first-release ()
+  (s d)      esc       40 first-release ()
+  (j k)      bspc      40 first-release ()
+  (k l)      del       40 first-release ()
+  (f d)      ret       40 first-release ()
+  (e r)      @min      40 first-release ()
+  (f j)      @cw       40 first-release ()
 )
 
 ;; ---------------------------------------------------------------------------
 ;; Navigation layer (hold Space)
 ;; ---------------------------------------------------------------------------
-;; Right hand: Vim-style movement
-;; Left hand: common edit actions
-;;
-;;        y      u      i      o
-;;        home   pgdn   pgup   end
-;;
-;;        h      j      k      l
-;;        left   down   up     right
+;;  row 2: mlft  ←mouse ↓mouse ↑mouse →mouse  mrgt
+;;  row 3:       ←      ↓      ↑       →
+;;  row 4:       home   pgdn   pgup    end
 ;;
 (deflayer nav
-  _    _    _    _    _    _    _    _    _    _    _    _    _    del
-  _    _    _    _    _    _    home pgdn pgup end  _    _    _    _
-  _    _    _    _    _    _    left down up   rght _    _    _
-  _    C-z  C-x  C-c  C-v  _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    _    _    _    _    _    mlft @mfl @mfd @mfu @mfr mrgt _    _
+  _    _    _    _    _    _    _    left down up   rght _    _
+  _    _    _    _    _    _    _    home pgdn pgup end  _
   _    _    _              _              _    _    _
 )
 
 ;; ---------------------------------------------------------------------------
 ;; Symbols layer (hold A)
 ;; ---------------------------------------------------------------------------
-;; Primary developer symbols on the right hand.
-;; Hold F to access sym-extra for the remaining symbols.
-;;
-;;        y      u      i      o      p      [
-;;        ~      [      ]      $      &      #
-;;
-;;        h      j      k      l
-;;        (      {      }      )
-;;
-;;        n      m      ,
-;;        `      <      >
+;;  row 2:  ^   [   ]   &
+;;  row 3:  (   {   }   )   _
+;;  row 4:  `   <   >
 ;;
 (deflayer sym
   _    _    _    _    _      _    _    _    _    _    _    _    _    _
-  _    _    _    _    _      _    @tld @lbk @rbk @dlr @amp @hsh _    _
-  _    _    _    _    @f-ext _    @lpr @lbr @rbr @rpr _    _    _
+  _    _    _    _    _      _    @crt @lbk @rbk @amp _    _    _    _
+  _    _    _    _    _      _    @lpr @lbr @rbr @rpr @usc _    _
   _    _    _    _    _      _    @btk @les @grt _    _    _
   _    _    _                _              _    _    _
 )
 
 ;; ---------------------------------------------------------------------------
-;; Symbols extra layer (hold A + hold F)
+;; Symbols extra layer (hold ;)
 ;; ---------------------------------------------------------------------------
-;; Remaining symbols for developers.
-;;
-;;        y      u      i      o      p      [
-;;               !      &      ^      $      ?
-;;
-;;        h      j      k      l      ;      '
-;;        %      -      +      *      =      _
+;;  row 2:  !   &   #   $          (left hand)
+;;  row 3:  ~   %   -   +   =     (left hand)
 ;;
 (deflayer sym-extra
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
-  _    _    _    _    _    _    _    @exc @amp @crt @dlr @qmk _    _
-  _    _    _    _    _    _    @pct @min @pls @ast @eql @usc _
+  _    @exc @amp @hsh @dlr _    _    _    _    _    _    _    _    _
+  @tld @pct @min @pls @eql _    _    _    _    _    _    _    _
   _    _    _    _    _    _    _    _    _    _    _    _
   _    _    _              _              _    _    _
 )
 
 ;; ---------------------------------------------------------------------------
-;; Function keys layer (hold ;)
+;; Function keys layer (hold ralt/Backspace)
 ;; ---------------------------------------------------------------------------
-;; Left hand types F-keys while right hand holds ;.
-;; G = live reload config.
-;;
-;;        1    2    3    4    5    6
-;;        F1   F2   F3   F4   F5   F6
-;;
-;;        q    w    e    r    t
-;;        F7   F8   F9   F10  F11  F12
-;;
-;;        z    x    c    v
-;;        mute vold volu play/pause
-;;
-;;        g = live reload
+;;  row 2:  F1  F2  F3  F4  F5  |  F6  F7  F8  F9  F10  F11
+;;  row 3:  1   2   3   4   5   |  6   7   8   9   0    F12
+;;  row 4:  mute vold volu play
 ;;
 (deflayer fn
-  _    f1   f2   f3   f4   f5   f6   _    _    _    _    _    _    _
-  _    f7   f8   f9   f10  f11  f12  _    _    _    _    _    _    _
-  _    _    _    _    _    lrld _    _    _    _    _    _    _
+  _    _    _    _    _    _    _    _    _    _    _    _    _    _
+  _    f1   f2   f3   f4   f5   f6   f7   f8   f9   f10  f11  _    _
+  _    1    2    3    4    5    6    7    8    9    0    f12  _
   _    mute vold volu pp   _    _    _    _    _    _    _
   _    _    _              _              _    _    _
 )
 
 ;; ---------------------------------------------------------------------------
-;; Mouse fast layer (hold X)
+;; Mouse fast layer (hold X) — accelerated movement
 ;; ---------------------------------------------------------------------------
-;; Large cursor jumps for navigating across the screen.
-;;
-;;        y       u       i       o
-;;        left    scroll  scroll  right
-;;        click   down    up      click
-;;
-;;        h       j       k       l
-;;        left    down    up      right
-;;
-;;        m
-;;        middle click
+;;  row 2:  lclick  scroll↓  scroll↑  rclick
+;;  row 3:  ←       ↓        ↑        →
+;;  row 4:          midclick
 ;;
 (deflayer mouse-fast
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
@@ -293,20 +259,11 @@
 )
 
 ;; ---------------------------------------------------------------------------
-;; Mouse slow layer (hold C)
+;; Mouse slow layer (hold C) — 1px precise movement
 ;; ---------------------------------------------------------------------------
-;; Small precise cursor movements for accurate clicking.
-;; Same layout as mouse-fast but with pixel-level precision.
-;;
-;;        y       u       i       o
-;;        left    scroll  scroll  right
-;;        click   down    up      click
-;;
-;;        h       j       k       l
-;;        left    down    up      right
-;;
-;;        m
-;;        middle click
+;;  row 2:  lclick  scroll↓  scroll↑  rclick
+;;  row 3:  ←       ↓        ↑        →
+;;  row 4:          midclick
 ;;
 (deflayer mouse-slow
   _    _    _    _    _    _    _    _    _    _    _    _    _    _
