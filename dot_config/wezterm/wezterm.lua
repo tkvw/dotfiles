@@ -7,7 +7,13 @@ local config = wezterm.config_builder() ---@type Config
 config.default_prog = { "mise", "x", "--", "nu" }
 config.font = font("MesloLGS NF")
 config.font_size = 9
-config.window_background_opacity = 0.9
+
+-- Transparent background
+-- config.window_background_opacity = 0.9
+-- or scheme ...
+config.color_scheme = "Catppuccin Mocha"
+-- config.color_scheme = "C64"
+
 config.initial_cols = 120
 config.window_decorations = "RESIZE"
 config.window_close_confirmation = "NeverPrompt"
@@ -26,34 +32,43 @@ config.cursor_blink_ease_out = "EaseOut"
 config.force_reverse_video_cursor = false
 -- Panes
 config.inactive_pane_hsb = {
-  saturation = 0.8,
-  brightness = 0.7,
+  saturation = 0.4,
+  brightness = 0.5,
 }
 -- Tab Styles
 config.use_fancy_tab_bar = false
 config.tab_and_split_indices_are_zero_based = true
 -- Key Bindings
-config.leader = { key = "Space", mods = "CTRL", timeout_milliseconds = 2000 }
+config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2500 }
 config.disable_default_key_bindings = true
 config.keys = {
   { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
   { key = "c", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
-  { key = "C", mods = "LEADER|SHIFT", action = act.CloseCurrentTab({ confirm = true }) },
+  { key = "C", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+  { key = "Q", mods = "LEADER", action = act.QuitApplication },
+  { key = "F", mods = "LEADER", action = act.ToggleFullScreen },
+  { key = "f", mods = "LEADER", action = act.TogglePaneZoomState },
   { key = "h", mods = "LEADER", action = act.SplitPane({ direction = "Left" }) },
   { key = "l", mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
   { key = "j", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
   { key = "k", mods = "LEADER", action = act.SplitPane({ direction = "Up" }) },
-  { key = "Q", mods = "LEADER|SHIFT", action = act.QuitApplication },
-  { key = "|", mods = "LEADER|SHIFT", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
+  { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+  { key = "|", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
   { key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
-  { key = "j", mods = "CTRL|ALT|SHIFT", action = act.ActivateTabRelative(-1) },
-  { key = "k", mods = "CTRL|ALT|SHIFT", action = act.ActivateTabRelative(1) },
-  { key = "F", mods = "CTRL|ALT|SHIFT", action = act.ToggleFullScreen },
-  { key = "f", mods = "CTRL|ALT", action = act.TogglePaneZoomState },
   ---------------------- Editing Text ----------------------
   { mods = "CTRL|SHIFT", key = "c", action = act.CopyTo("Clipboard") },
   { mods = "CTRL|SHIFT", key = "v", action = act.PasteFrom("Clipboard") },
 }
+
+for i = 0, 9 do
+  table.insert(config.keys, {
+    key = tostring(i),
+    mods = "LEADER",
+    action = wezterm.action.ActivateTab(i),
+  })
+end
+
 -- Show leader key in status bar when active
 wezterm.on("update-right-status", function(window, _)
   local SOLID_LEFT_ARROW = ""

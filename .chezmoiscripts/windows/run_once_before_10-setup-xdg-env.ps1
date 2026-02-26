@@ -1,18 +1,18 @@
-$xdgVars = @{
-    XDG_CONFIG_HOME = [IO.Path]::Combine($env:USERPROFILE, ".config")
-    XDG_DATA_HOME   = [IO.Path]::Combine($env:USERPROFILE, ".local", "share")
-    XDG_STATE_HOME  = [IO.Path]::Combine($env:USERPROFILE, ".local", "state")
-    XDG_CACHE_HOME  = [IO.Path]::Combine($env:USERPROFILE, ".cache")
-    XDG_RUNTIME_DIR = [IO.Path]::Combine($env:USERPROFILE, ".local", "run")
-}
-foreach ($entry in $xdgVars.GetEnumerator()) {
-    [Environment]::SetEnvironmentVariable($entry.Key, $entry.Value, "User")
-    Write-Host "Set $($entry.Key) to $($entry.Value)"
-}
+# $xdgVars = @{
+#     XDG_CONFIG_HOME = [IO.Path]::Combine($env:USERPROFILE, ".config")
+#     XDG_DATA_HOME   = [IO.Path]::Combine($env:USERPROFILE, ".local", "share")
+#     XDG_STATE_HOME  = [IO.Path]::Combine($env:USERPROFILE, ".local", "state")
+#     XDG_CACHE_HOME  = [IO.Path]::Combine($env:USERPROFILE, ".cache")
+#     XDG_RUNTIME_DIR = [IO.Path]::Combine($env:USERPROFILE, ".local", "run")
+# }
+# foreach ($entry in $xdgVars.GetEnumerator()) {
+#     [Environment]::SetEnvironmentVariable($entry.Key, $entry.Value, "User")
+#     Write-Host "Set $($entry.Key) to $($entry.Value)"
+# }
 $pathsToAdd = @(
     [IO.Path]::Combine($env:USERPROFILE, ".local", "bin")
-    [IO.Path]::Combine($env:USERPROFILE, ".local", "share", "mise", "shims")
-    [IO.Path]::Combine($env:USERPROFILE, "scoop", "shims")
+    # [IO.Path]::Combine($env:USERPROFILE, ".local", "share", "mise", "shims")
+    # [IO.Path]::Combine($env:USERPROFILE, "scoop", "shims")
 )
 
 $currentPath = [Environment]::GetEnvironmentVariable("PATH", "User")

@@ -9,6 +9,30 @@ return {
     },
     keys = {
       {
+        "<C-Left>",
+        mode = { "n", "c", "v", "t" },
+        '<Cmd>lua require("smart-splits").resize_left()<CR>',
+        desc = "Resize split, move pane left",
+      },
+      {
+        "<C-Down>",
+        mode = { "n", "c", "v", "t" },
+        '<Cmd>lua require("smart-splits").resize_down()<CR>',
+        desc = "Resize split, move pane down",
+      },
+      {
+        "<C-Up>",
+        mode = { "n", "c", "v", "t" },
+        '<Cmd>lua require("smart-splits").resize_up()<CR>',
+        desc = "Resize split, move pane up",
+      },
+      {
+        "<C-Right>",
+        mode = { "n", "c", "v", "t" },
+        '<Cmd>lua require("smart-splits").resize_right()<CR>',
+        desc = "Resize split, move pane right",
+      },
+      {
         "<C-h>",
         mode = { "n", "c", "v", "t" },
         '<Cmd>lua require("smart-splits").move_cursor_left()<CR>',
