@@ -1,18 +1,17 @@
 # If not running interactively, don't do anything
 case $- in
-    *i*) ;;
-      *) return;;
+*i*) ;;
+*) return ;;
 esac
 
 if [ -d ~/.bashrc.d ]; then
-    for f in ~/.bashrc.d/*.sh; do
-        [ -r "$f" ] && source "$f"
-    done
+  for f in ~/.bashrc.d/*.sh; do
+    [ -r "$f" ] && source "$f"
+  done
 fi
 
-command -v nu >/dev/null && exec nu
-
-if type starship &> /dev/null; then
-    eval "$(starship init bash)"
-fi
-
+# command -v nu >/dev/null && exec nu
+#
+# if type starship &> /dev/null; then
+#     eval "$(starship init bash)"
+# fi

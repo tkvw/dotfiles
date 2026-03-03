@@ -10,3 +10,5 @@ behavior = "own"
 backend = "ssh"
 key = "~/.ssh/signing_keys/tkvw.github.com"
 
+[signing.backends.ssh]
+program = "C:/Program Files/OpenSSH/ssh-keygen.exe"
