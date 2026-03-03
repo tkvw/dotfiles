@@ -10,5 +10,7 @@ behavior = "own"
 backend = "ssh"
 key = "~/.ssh/signing_keys/tkvw.github.com"
 
+{{- if .is_win }}
 [signing.backends.ssh]
 program = "C:/Program Files/OpenSSH/ssh-keygen.exe"
+{{- end }}

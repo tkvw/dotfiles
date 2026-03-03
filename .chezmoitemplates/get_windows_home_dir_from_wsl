@@ -1,2 +1,2 @@
-
-{{-     output "wslpath" "-a" (output "cmd.exe" "/C" "echo %USERPROFILE%" | trim) | trim -}}
+{{- $winpath := output "sh" "-c" "wslpath \"$(cmd.exe /C 'echo %USERPROFILE%' 2>/dev/null | tr -d '\\r')\"" | trim -}}
+{{ $winpath }}
