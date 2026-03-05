@@ -1,7 +1,6 @@
 CLAUDE.md
 README.md
 
-
 {{- if not .is_win }}
 AppData/**/*
 .chezmoiscripts/windows/*
@@ -18,6 +17,8 @@ AppData/**/*
 .config/mise/conf.d/sops.toml
 .config/mise/conf.d/starship.toml
 .config/mise/conf.d/zoxide.toml
+.config/starship/**/*
+.local/share/mkcert/**/*
 {{- end }}
 {{- if .is_win_sandbox }}
 .config/mise/conf.d/bat.toml
@@ -29,19 +30,9 @@ AppData/**/*
 .config/mise/conf.d/ripgrep.toml
 {{- end }}
 {{- if or .is_wsl .is_docker .is_win_sandbox }}
-.config/mise/conf.d/wezterm.toml
-{{- end }}
-{{- if or .is_docker .is_wsl .is_win_sandbox }}
-.ssh/**/*
-{{- end }}
-{{- if or .is_docker .is_win_sandbox }}
-.local/share/mkcert/**/*
-{{- end }}
-{{- if or .is_wsl .is_docker .is_win_sandbox }}
 .config/kanata/**/*
-{{- end }}
-{{- if or .is_docker .is_win_sandbox }}
-.config/starship/**/*
+.config/mise/conf.d/wezterm.toml
+.ssh/**/*
 {{- end }}
 {{- if or (not .is_linux) .is_docker }}
 .bashrc
@@ -49,11 +40,9 @@ AppData/**/*
 {{- else if not .is_wsl }}
 .bashrc.d/90-wsl-ssh-agent.sh
 {{- end }}
-
 {{- if or (not .is_linux) .is_docker .is_wsl }}
 .chezmoiscripts/linux/*
-{{ end }}
+{{- end }}
 {{- if not .is_wsl }}
 .chezmoiscripts/wsl/*
-{{ end -}}
-
+{{- end }}
