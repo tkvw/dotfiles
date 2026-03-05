@@ -1,3 +1,7 @@
+[settings]
+experimental=true
+trusted_config_paths = ["~/src/artsystems","~/src/tkvw"]
+
+
 [env]
 MY_VAR = '123'
-MISE_EXPERIMENTAL = "true"

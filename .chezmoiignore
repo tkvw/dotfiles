@@ -40,6 +40,11 @@ AppData/**/*
 {{- else if not .is_wsl }}
 .bashrc.d/90-wsl-ssh-agent.sh
 {{- end }}
+
+{{- if not .is_wsl }}
+.config/nushell/autoload/wsl-ssh-agent.nu
+{{- end }}
+
 {{- if or (not .is_linux) .is_docker .is_wsl }}
 .chezmoiscripts/linux/*
 {{- end }}
