@@ -10,11 +10,13 @@
 - CLI snippets in nushell syntax
 
 ## Environment
-{{ if eq .chezmoi.os "windows" -}}
+{{ if .is_win -}}
 - Windows 11, using git bash
 - Use proper escaping for git bash when running commands
 {{ else if .is_wsl -}}
 - Ubuntu 24 in WSL
+{{ else if .is_docker -}}
+- Linux in docker
 {{ end -}}
 - Editor: nvim (LazyVim)
 - Shell: nushell

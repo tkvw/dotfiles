@@ -1,0 +1,7 @@
+[tools]
+dotnet = "latest"
+#"dotnet:roslyn-language-server" = "5.5.0-2.26103.6"
+#"dotnet:EasyDotnet" = "latest"
+
+[settings.dotnet]
+package_flags = ["prerelease"]

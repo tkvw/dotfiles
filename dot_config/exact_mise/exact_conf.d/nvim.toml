@@ -1,0 +1,4 @@
+[tools]
+neovim = "latest"
+tree-sitter = "latest"
+#

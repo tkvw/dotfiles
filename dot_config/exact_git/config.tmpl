@@ -1,0 +1,33 @@
+[core]
+	excludesFile = ~/.config/git/gitignore
+	autocrlf = input
+	eol = lf
+
+[init]
+	defaultBranch = main
+[safe]
+	directory = *
+
+[gpg]
+	format = ssh
+[gpg "ssh"]
+  allowedSignersFile = ~/.ssh/allowed_signers
+
+[commit]
+	gpgsign = true
+
+[user]
+	name = Dennie de Lange
+	email = "621098+tkvw@users.noreply.github.com"
+	signingkey = {{ includeTemplate "signing_key_tkvw_pub" | quote  }}
+
+{{- if .is_win }}
+[include]
+  path = ~/.config/git/config.d/windows
+{{- end }}
+
+[includeIf "hasconfig:remote.*.url:git@github.com:tkvw/*"]
+  path = ~/.config/git/config.d/tkvw
+[includeIf "hasconfig:remote.*.url:git@github.com:asdennie/*"]
+  path = ~/.config/git/config.d/asdennie
+

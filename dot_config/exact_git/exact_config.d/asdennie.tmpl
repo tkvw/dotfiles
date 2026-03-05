@@ -2,7 +2,7 @@
 [user]
 	name = Dennie de Lange
 	email = "72432852+asdennie@users.noreply.github.com"
-	signingkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBiCRhU3RWGDdOxch7ELQufTZrg6Uc+N9BiuDvne1RIx"  
+	signingkey = {{ includeTemplate "signing_key_asdennie_pub" | quote  }}
 
 [url "git@asdennie.github.com:"]
   insteadOf = git@github.com:

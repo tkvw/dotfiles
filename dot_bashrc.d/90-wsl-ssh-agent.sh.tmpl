@@ -1,0 +1,9 @@
+export SSH_AUTH_SOCK=$HOME/.ssh/agent.sock
+NPIPERELAY={{- printf "%s/.local/share/mise/installs/github-jstarks-npiperelay/0.1.0/npiperelay.exe" (includeTemplate "get_windows_home_dir_from_wsl" . | trim) | quote }}
+
+if command -v socat >/dev/null && test -x "$NPIPERELAY"; then
+  if [ ! -S "$SSH_AUTH_SOCK" ] || ! pgrep -f "socat.*agent.sock" >/dev/null; then
+    rm -f "$SSH_AUTH_SOCK"
+    (setsid socat UNIX-LISTEN:"$SSH_AUTH_SOCK",fork EXEC:"$NPIPERELAY -ei -s //./pipe/openssh-ssh-agent",nofork &) >/dev/null 2>&1
+  fi
+fi

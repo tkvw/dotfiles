@@ -1,0 +1,3 @@
+[tools]
+starship = "latest"
+"cargo:starship-jj" = "latest"

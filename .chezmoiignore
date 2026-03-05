@@ -1,18 +1,59 @@
 CLAUDE.md
 README.md
 
-{{- if ne .chezmoi.os "windows" }}
+
+{{- if not .is_win }}
+AppData/**/*
 .chezmoiscripts/windows/*
-{{ end }}
-{{- if ne .chezmoi.os "linux" }}
+{{- end }}
+{{- if or .is_docker .is_win_sandbox }}
+.config/mise/conf.d/bitwarden-cli.toml
+.config/mise/conf.d/bottom.toml
+.config/mise/conf.d/carapace.toml
+.config/mise/conf.d/chezmoi.toml
+.config/mise/conf.d/dotnet.toml
+.config/mise/conf.d/mkcert.toml
+.config/mise/conf.d/nvim.toml
+.config/mise/conf.d/rust.toml
+.config/mise/conf.d/sops.toml
+.config/mise/conf.d/starship.toml
+.config/mise/conf.d/zoxide.toml
+{{- end }}
+{{- if .is_win_sandbox }}
+.config/mise/conf.d/bat.toml
+.config/mise/conf.d/fd.toml
+.config/mise/conf.d/fzf.toml
+.config/mise/conf.d/jj.toml
+.config/mise/conf.d/jq.toml
+.config/mise/conf.d/node.toml
+.config/mise/conf.d/ripgrep.toml
+{{- end }}
+{{- if or .is_wsl .is_docker .is_win_sandbox }}
+.config/mise/conf.d/wezterm.toml
+{{- end }}
+{{- if or .is_docker .is_wsl .is_win_sandbox }}
+.ssh/**/*
+{{- end }}
+{{- if or .is_docker .is_win_sandbox }}
+.local/share/mkcert/**/*
+{{- end }}
+{{- if or .is_wsl .is_docker .is_win_sandbox }}
+.config/kanata/**/*
+{{- end }}
+{{- if or .is_docker .is_win_sandbox }}
+.config/starship/**/*
+{{- end }}
+{{- if or (not .is_linux) .is_docker }}
+.bashrc
+.bashrc.d/**/*
+{{- else if not .is_wsl }}
+.bashrc.d/90-wsl-ssh-agent.sh
+{{- end }}
+
+{{- if or (not .is_linux) .is_docker .is_wsl }}
 .chezmoiscripts/linux/*
 {{ end }}
 {{- if not .is_wsl }}
 .chezmoiscripts/wsl/*
-{{ else }}
-~/.config/mise/conf.d/bitwarden.conf
 {{ end -}}
 
-{{- if not .age }}
-**/encrypted_*
-{{- end }}

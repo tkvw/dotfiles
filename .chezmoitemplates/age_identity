@@ -1,4 +1,4 @@
-{{- $is_wsl := eq (includeTemplate "is_wsl" .) "true" -}}
+{{- $is_wsl := eq (includeTemplate "is_wsl" . | trim) "true" -}}
 {{- if $is_wsl -}}
 {{/* use the identitykey from the windows host*/}}
 {{- $home := includeTemplate "get_windows_home_dir_from_wsl" . | trim -}}

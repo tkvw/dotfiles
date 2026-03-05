@@ -8,9 +8,10 @@ email = "621098+tkvw@users.noreply.github.com"
 [signing]
 behavior = "own"
 backend = "ssh"
-key = "~/.ssh/signing_keys/tkvw.github.com"
+key = {{ includeTemplate "signing_key_tkvw_pub" | quote  }}
 
 {{- if .is_win }}
 [signing.backends.ssh]
 program = "C:/Program Files/OpenSSH/ssh-keygen.exe"
 {{- end }}
+
