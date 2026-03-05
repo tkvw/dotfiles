@@ -26,6 +26,8 @@
   path = ~/.config/git/config.d/windows
 {{- end }}
 
+[includeIf "hasconfig:remote.*.url:https://github.com/tkvw/*"]
+  path = ~/.config/git/config.d/tkvw
 [includeIf "hasconfig:remote.*.url:git@github.com:tkvw/*"]
   path = ~/.config/git/config.d/tkvw
 [includeIf "hasconfig:remote.*.url:git@github.com:asdennie/*"]
