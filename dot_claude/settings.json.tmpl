@@ -17,5 +17,8 @@
   "promptSuggestionEnabled": false,
   "permissions": {
     "defaultMode": "plan"
-  }
+  },
+  {{- if .is_docker }}
+  "skipDangerousModePermissionPrompt": true
+  {{- end }}
 }
