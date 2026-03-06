@@ -2,6 +2,7 @@ local env = require("config.env")
 return {
   {
     "mrjones2014/smart-splits.nvim",
+    enabled = false,
     event = "VeryLazy",
     cond = env.is_tmux or env.is_wezterm,
     opts = {
