@@ -16,10 +16,8 @@ return {
       enabled = function(root_dir)
         local chezmoi_dir = vim.fs.normalize(vim.fn.expand("~/.local/share/chezmoi"))
         local is_chezmoi = root_dir and root_dir:find(chezmoi_dir, 1, true) ~= nil
-        vim.notify(
-          "root_dir: " .. (root_dir or "nil") .. " | chezmoi: " .. tostring(is_chezmoi) .. " | dir " .. chezmoi_dir
-        )
-        return true
+
+        return is_chezmoi
       end,
     },
   },
