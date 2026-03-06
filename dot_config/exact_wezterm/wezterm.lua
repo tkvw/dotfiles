@@ -5,6 +5,20 @@ local font = wezterm.font
 local config = wezterm.config_builder() ---@type Config
 
 config.default_prog = { "mise", "x", "--", "nu" }
+config.launch_menu = {}
+config.wsl_domains = {
+  {
+    name = "WSL:Ubuntu Bash",
+    distribution = "Ubuntu",
+    default_cwd = "~",
+  },
+  {
+    name = "WSL:Ubuntu Nushell",
+    distribution = "Ubuntu",
+    default_cwd = "~",
+    default_prog = { "/home/dennie/.local/share/mise/shims/nu" },
+  },
+}
 config.font = font("MesloLGS NF")
 config.font_size = 9
 
@@ -54,6 +68,7 @@ config.keys = {
   { key = "k", mods = "LEADER", action = act.SplitPane({ direction = "Up" }) },
   { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
   { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
+  { key = "F3", mods = "NONE", action = act.ShowLauncher },
   { key = "|", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
   { key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   ---------------------- Editing Text ----------------------

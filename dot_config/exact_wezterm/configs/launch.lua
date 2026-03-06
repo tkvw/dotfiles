@@ -6,18 +6,17 @@ local config = {
   launch_menu = {
     {
       label = "WSL Bash",
-      args = { "wsl.exe", "-e", "bash" }
+      args = { "wsl.exe", "-e", "bash" },
     },
     {
       label = "WSL Nushell",
-      args = { "wsl.exe", "-e", "nu" }
-    }
+      args = { "wsl.exe", "-e", "mise x aqua:nushell/nushell -- nu" },
+    },
   },
   {
     label = "WSL Bash login",
-    args = { "wsl.exe", "-e", "bash", "-l" }
-  }
-
+    args = { "wsl.exe", "-e", "bash", "-l" },
+  },
 }
 
 return config
