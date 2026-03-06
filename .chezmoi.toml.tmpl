@@ -16,7 +16,6 @@ encryption = "age"
   args = ["-NoProfile", "-ExecutionPolicy", "Bypass" ]
 
 [data]
-  profile = {{ $profile | quote }}
   is_wsl = {{ includeTemplate "is_wsl" . | trim }}
   age = {{ stat $age_identity_path | not | not }}
   is_docker = {{ includeTemplate "is_docker" . | trim }}
