@@ -84,31 +84,34 @@ for i = 0, 9 do
   })
 end
 
+local tabline = require("plugins.tabline")
+tabline(config)
+
 -- Show leader key in status bar when active
-wezterm.on("update-right-status", function(window, _)
-  local SOLID_LEFT_ARROW = ""
-  local prefix = ""
-
-  if window:leader_is_active() then
-    prefix = " " .. utf8.char(0x1f47e) .. " "
-    SOLID_LEFT_ARROW = utf8.char(0xe0b2)
-
-    if window:active_tab():tab_id() ~= 0 then
-      ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
-    end
-
-    if window:active_tab():tab_id() == 0 then
-      ARROW_FOREGROUND = { Foreground = { Color = "#C6A0F6" } }
-    end
-  end
-
-  window:set_left_status(wezterm.format({
-    { Background = { Color = "#b7bdf8" } },
-    { Text = prefix },
-    ARROW_FOREGROUND,
-    { Text = SOLID_LEFT_ARROW },
-  }))
-end)
+-- wezterm.on("update-right-status", function(window, _)
+--   local SOLID_LEFT_ARROW = ""
+--   local prefix = ""
+--
+--   if window:leader_is_active() then
+--     prefix = " " .. utf8.char(0x1f47e) .. " "
+--     SOLID_LEFT_ARROW = utf8.char(0xe0b2)
+--
+--     if window:active_tab():tab_id() ~= 0 then
+--       ARROW_FOREGROUND = { Foreground = { Color = "#1e2030" } }
+--     end
+--
+--     if window:active_tab():tab_id() == 0 then
+--       ARROW_FOREGROUND = { Foreground = { Color = "#C6A0F6" } }
+--     end
+--   end
+--
+--   window:set_left_status(wezterm.format({
+--     { Background = { Color = "#b7bdf8" } },
+--     { Text = prefix },
+--     ARROW_FOREGROUND,
+--     { Text = SOLID_LEFT_ARROW },
+--   }))
+-- end)
 -- Plugins
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
