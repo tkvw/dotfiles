@@ -56,24 +56,24 @@ config.tab_and_split_indices_are_zero_based = true
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 2500 }
 config.disable_default_key_bindings = true
 config.keys = {
-  { key = "t", mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
-  { key = "c", mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
-  { key = "C", mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
-  { key = "Q", mods = "LEADER", action = act.QuitApplication },
-  { key = "F", mods = "LEADER", action = act.ToggleFullScreen },
-  { key = "f", mods = "LEADER", action = act.TogglePaneZoomState },
-  { key = "h", mods = "LEADER", action = act.SplitPane({ direction = "Left" }) },
-  { key = "l", mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
-  { key = "j", mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
-  { key = "k", mods = "LEADER", action = act.SplitPane({ direction = "Up" }) },
-  { key = "p", mods = "LEADER", action = act.ActivateTabRelative(-1) },
-  { key = "n", mods = "LEADER", action = act.ActivateTabRelative(1) },
-  { key = "F3", mods = "NONE", action = act.ShowLauncher },
-  { key = "|", mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
-  { key = "\\", mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+  { key = "t",           mods = "LEADER", action = act.SpawnTab("CurrentPaneDomain") },
+  { key = "c",           mods = "LEADER", action = act.CloseCurrentPane({ confirm = false }) },
+  { key = "C",           mods = "LEADER", action = act.CloseCurrentTab({ confirm = true }) },
+  { key = "Q",           mods = "LEADER", action = act.QuitApplication },
+  { key = "F",           mods = "LEADER", action = act.ToggleFullScreen },
+  { key = "f",           mods = "LEADER", action = act.TogglePaneZoomState },
+  { key = "h",           mods = "LEADER", action = act.SplitPane({ direction = "Left" }) },
+  { key = "l",           mods = "LEADER", action = act.SplitPane({ direction = "Right" }) },
+  { key = "j",           mods = "LEADER", action = act.SplitPane({ direction = "Down" }) },
+  { key = "k",           mods = "LEADER", action = act.SplitPane({ direction = "Up" }) },
+  { key = "p",           mods = "LEADER", action = act.ActivateTabRelative(-1) },
+  { key = "n",           mods = "LEADER", action = act.ActivateTabRelative(1) },
+  { key = "F3",          mods = "NONE",   action = act.ShowLauncher },
+  { key = "|",           mods = "LEADER", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+  { key = "\\",          mods = "LEADER", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
   ---------------------- Editing Text ----------------------
-  { mods = "CTRL|SHIFT", key = "c", action = act.CopyTo("Clipboard") },
-  { mods = "CTRL|SHIFT", key = "v", action = act.PasteFrom("Clipboard") },
+  { mods = "CTRL|SHIFT", key = "c",       action = act.CopyTo("Clipboard") },
+  { mods = "CTRL|SHIFT", key = "v",       action = act.PasteFrom("Clipboard") },
 }
 
 for i = 0, 9 do
@@ -115,7 +115,16 @@ tabline(config)
 -- Plugins
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
-smart_splits.apply_to_config(config, {})
+smart_splits.apply_to_config(config, {
+  direction_keys = {
+    move = { 'h', 'j', 'k', 'l' },
+    resize = { 'LeftArrow', 'DownArrow', 'UpArrow', 'RightArrow' }
+  },
+  modifiers = {
+    move = 'CTRL',
+    resize = 'CTRL'
+  }
+})
 
 -- local h = require("utils.config")
 --
