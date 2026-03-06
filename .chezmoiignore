@@ -51,3 +51,6 @@ AppData/**/*
 {{- if not .is_wsl }}
 .chezmoiscripts/wsl/*
 {{- end }}
+{{- if .is_docker }}
+.config/git/config.d/*/url
+{{- end }}

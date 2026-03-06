@@ -1,6 +1,6 @@
 [settings]
 experimental=true
-trusted_config_paths = ["~/src/artsystems","~/src/tkvw"]
+trusted_config_paths = ["~/src/artsystems","~/src/tkvw","/code"]
 
 
 [env]

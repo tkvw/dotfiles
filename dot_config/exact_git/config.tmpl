@@ -25,11 +25,14 @@
 [include]
   path = ~/.config/git/config.d/windows
 {{- end }}
-
+{{- if not .is_docker }}
 [includeIf "hasconfig:remote.*.url:https://github.com/tkvw/*"]
-  path = ~/.config/git/config.d/tkvw
+  path = ~/.config/git/config.d/tkvw/url
 [includeIf "hasconfig:remote.*.url:git@github.com:tkvw/*"]
-  path = ~/.config/git/config.d/tkvw
+  path = ~/.config/git/config.d/tkvw/url
+{{- end }}
 [includeIf "hasconfig:remote.*.url:git@github.com:asdennie/*"]
-  path = ~/.config/git/config.d/asdennie
-
+  path = ~/.config/git/config.d/asdennie/user
+{{- if not .is_docker }}
+  path = ~/.config/git/config.d/asdennie/url
+{{- end }}
