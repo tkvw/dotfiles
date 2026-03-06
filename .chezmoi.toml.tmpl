@@ -1,7 +1,3 @@
-{{- $profiles := list "desktop" "laptop" "docker-claude" -}}
-{{- $profile := promptChoiceOnce . "profile" "What profile do you want to use" $profiles "laptop" -}}
-
-{{ if ne $profile "docker-claude" }}
 encryption = "age"
 
 {{- $age_identity_path := includeTemplate "age_identity" . | trim }}
@@ -27,7 +23,3 @@ encryption = "age"
   is_win = {{ eq .chezmoi.os "windows" | not | not }}
   is_linux = {{ eq .chezmoi.os "linux" | not | not }}
   is_win_sandbox = {{ includeTemplate "is_windows_sandbox" . | trim }}
-{{else}}
-[data]
-  profile = {{ $profile | quote }}
-{{end}}
