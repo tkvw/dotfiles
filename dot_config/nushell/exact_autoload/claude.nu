@@ -1,32 +1,21 @@
-def --wrapped docker-claude-code [...rest: string] {
+def docker-claude-base [] {
   let ssh_sock = $env.SSH_AUTH_SOCK
-  let args = [
+  [
     "run" "-it" "--rm"
-    "-v" "mise-cache:/home/dennie/.local/share/mise"
+    "-v" $"($env.HOME)/.local/share/mise:/home/code/.local/share/mise"
+    "-v" $"($env.HOME)/.local/share/pnpm:/home/code/.local/share/pnpm"
     "-v" "claude_code_home:/home/code"
     "-v" $"($env.PWD):/code"
     "-v" $"($ssh_sock):/ssh-agent"
     "-e" "SSH_AUTH_SOCK=/ssh-agent"
     "mise"
-    "mise" "x" "claude" "--" "claude" "--dangerously-skip-permissions"
-    ...$rest
   ]
-  docker ...$args
+}
+
+def --wrapped docker-claude-code [...rest: string] {
+  docker ...(docker-claude-base) "mise" "x" "claude" "--" "claude" "--dangerously-skip-permissions" ...$rest
 }
 
 def --wrapped docker-claude-code-bash [...rest: string] {
-  let ssh_sock = $env.SSH_AUTH_SOCK
-  let args = [
-    "run" "-it" "--rm"
-    "-v" "mise-cache:/home/dennie/.local/share/mise"
-    "-v" "claude_code_home:/home/code"
-    "-v" $"($env.PWD):/code"
-    "-v" $"($ssh_sock):/ssh-agent"
-    "-e" "SSH_AUTH_SOCK=/ssh-agent"
-    "mise"
-    "bash"
-    ...$rest
-  ]
-
-  docker ...$args
+  docker ...(docker-claude-base) "bash" ...$rest
 }
