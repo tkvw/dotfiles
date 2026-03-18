@@ -4,6 +4,7 @@
     "lazyvim.plugins.extras.dap.core",
     "lazyvim.plugins.extras.editor.harpoon2",
     "lazyvim.plugins.extras.formatting.prettier",
+    "lazyvim.plugins.extras.formatting.biome",
     "lazyvim.plugins.extras.lang.nushell",
     "lazyvim.plugins.extras.lang.svelte",
     "lazyvim.plugins.extras.lang.typescript",

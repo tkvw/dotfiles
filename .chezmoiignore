@@ -11,6 +11,7 @@ AppData/**/*
 .config/mise/conf.d/carapace.toml
 .config/mise/conf.d/chezmoi.toml
 .config/mise/conf.d/dotnet.toml
+.config/mise/conf.d/easydotnet.toml
 .config/mise/conf.d/mkcert.toml
 .config/mise/conf.d/nvim.toml
 .config/mise/conf.d/rust.toml
